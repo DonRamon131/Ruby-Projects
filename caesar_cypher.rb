@@ -9,12 +9,15 @@ string_show_byte("String")
 def caesar_cypher(string, shift)
     new_string = ""
     string.each_char do |c|
-        new_string +=  (c.ord + shift).chr
+        #new_string +=  (c.ord + shift).chr
         if (c.ord + shift) > 122
             new_string += (c.ord + shift - 26).chr
+        else
+        new_string +=  (c.ord + shift).chr
         end
+    end
     print "#{string} = #{new_string}\n" 
 end
 
-caesar_cypher("abcfg", 2) #xyz{|
-caesar_cypher("abcde", 2) #cdefg
+caesar_cypher("xyz", 5) #xyz{|
+caesar_cypher("abc", 5) #cdefg
