@@ -1,5 +1,6 @@
 $table_to_terminal =  "\n1|2|3\n4|5|6\n7|8|9\n"
-$table = [1,2,3,4,5,6,7,8,9,'yes']
+$table = [1,2,3,4,5,6,7,8,9]
+print $table_to_terminal
 =begin
       "1|2|3
        4|5|6
@@ -8,14 +9,14 @@ $table = [1,2,3,4,5,6,7,8,9,'yes']
 module Players
    def writeable(place)
       place = place.to_i
-      $table.map do |n|
-         if n === place
-            n = @char
+      $table.map! do |n|
+         if n == place
+            @char
+         else
+            n
          end
       end
-      p place
-      p $table
-      p @char    
+      p $table    
    end
 
    def initialize(name ,char)
