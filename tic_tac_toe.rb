@@ -1,6 +1,4 @@
 $table_to_terminal =  "\n1|2|3\n4|5|6\n7|8|9\n"
-$table = [1,2,3,4,5,6,7,8,9]
-print $table_to_terminal
 =begin
       "1|2|3
        4|5|6
@@ -8,15 +6,7 @@ print $table_to_terminal
 =end
 module Players
    def writeable(place)
-      place = place.to_i
-      $table.map! do |n|
-         if n == place
-            @char
-         else
-            n
-         end
-      end
-      p $table    
+      $table_to_terminal.gsub!(place, @char)
    end
 
    def initialize(name ,char)
@@ -25,7 +15,7 @@ module Players
    end
    
    def return_name_and_char()
-      "#{@name} will be playing as: #{$char}"
+      "#{@name} will be playing as: #{@char}"
    end
    def return_name()
       "#{@name}"
@@ -41,9 +31,19 @@ class Player2
 end
 
 def write_on_table()
-   print "\n#{$first_player.return_name}, select place: "
-   place = gets.chomp
-   $first_player.writeable(place)
+   x = 0
+   while x < 4
+      print "\n#{$first_player.return_name}, select place: "
+      place = gets.chomp
+      $first_player.writeable(place)
+      print $table_to_terminal
+
+      print "\n#{$second_player.return_name}, select place: "
+      place = gets.chomp
+      $second_player.writeable(place)
+      print $table_to_terminal
+      x += 1
+   end
 end
 
 def game_loop()
@@ -62,7 +62,6 @@ def game_loop()
 
    print "\n" + $first_player.return_name_and_char + ", " + $second_player.return_name_and_char + "\n"
    print $table_to_terminal
-
    write_on_table()
 end
 
