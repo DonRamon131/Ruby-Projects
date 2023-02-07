@@ -1,4 +1,5 @@
 $table_to_terminal =  "\n1|2|3\n4|5|6\n7|8|9\n"
+$arr = []
 =begin
       "1|2|3
        4|5|6
@@ -9,10 +10,17 @@ module Players
       $table_to_terminal.gsub!(place, @char)
    end
 
-   def initialize(name ,char)
-      @name = name
-      @char = char
-   end
+   def check_if_written()
+      print "\n#{self.return_name}, select place: "
+      place = gets.chomp
+      until $arr.include?(place) == false and ( place.to_i >= 0 and place.to_i <= 9)
+         print "Please select a free space: "
+         place = gets.chomp
+      end
+      $arr << place
+      self.writeable(place)
+      print $table_to_terminal
+   end   
    
    def return_name_and_char()
       "#{@name} will be playing as: #{@char}"
@@ -24,25 +32,27 @@ end
 
 class Player1
    include Players 
+   def initialize(name ,char)
+      @name = name
+      @char = char
+   end
 end
 
 class Player2
    include Players
+   def initialize(name ,char)
+      @name = name
+      @char = char
+   end
 end
 
 def write_on_table()
    x = 0
    while x < 4
-      print "\n#{$first_player.return_name}, select place: "
-      place = gets.chomp
-      $first_player.writeable(place)
-      print $table_to_terminal
-
-      print "\n#{$second_player.return_name}, select place: "
-      place = gets.chomp
-      $second_player.writeable(place)
-      print $table_to_terminal
+      $first_player.check_if_written()
+      $second_player.check_if_written()
       x += 1
+      print $arr
    end
 end
 
