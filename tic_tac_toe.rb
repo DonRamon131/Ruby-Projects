@@ -1,5 +1,5 @@
 $table_to_terminal =  "\n1|2|3\n4|5|6\n7|8|9\n"
-$table = "123456789".split("")
+$table = [1,2,3,4,5,6,7,8,9,'yes']
 =begin
       "1|2|3
        4|5|6
@@ -7,12 +7,15 @@ $table = "123456789".split("")
 =end
 module Players
    def writeable(place)
-      for s in $table
-         if place == s.to_i
-            s = place
+      place = place.to_i
+      $table.map do |n|
+         if n === place
+            n = @char
          end
       end
-      p $table_to_terminal
+      p place
+      p $table
+      p @char    
    end
 
    def initialize(name ,char)
@@ -21,7 +24,7 @@ module Players
    end
    
    def return_name_and_char()
-      "#{@name} will be playing as: #{@char}"
+      "#{@name} will be playing as: #{$char}"
    end
    def return_name()
       "#{@name}"
