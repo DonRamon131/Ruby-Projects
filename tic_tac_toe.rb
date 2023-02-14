@@ -1,10 +1,6 @@
 $table_to_terminal =  "\n1|2|3\n4|5|6\n7|8|9\n"
 $arr = []
-=begin
-      "1|2|3
-       4|5|6
-       7|8|9"
-=end
+
 module Players
    def writeable(place)
       $table_to_terminal.gsub!(place, @char)
@@ -51,6 +47,11 @@ def write_on_table()
       x += 1
       print $arr
    end
+end
+
+def check_if_won()
+   #"\n1|2|3\n4|5|6\n7|8|9\n"
+   
 end
 
 def game_loop()
