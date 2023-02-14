@@ -13,14 +13,19 @@ module Players
    def check_if_written()
       print "\n#{self.return_name}, select place: "
       place = gets.chomp
-      until $arr.include?(place) == false and ( place.to_i >= 0 and place.to_i <= 9)
-         print "Please select a free space: "
+      until $arr.include?(place) == false and ( place.to_i > 0 and place.to_i <= 9)
+         print "#{self.return_name}, please select a free space: "
          place = gets.chomp
       end
       $arr << place
       self.writeable(place)
       print $table_to_terminal
-   end   
+   end
+   
+   def initialize(name ,char)
+      @name = name
+      @char = char
+   end
    
    def return_name_and_char()
       "#{@name} will be playing as: #{@char}"
@@ -32,18 +37,10 @@ end
 
 class Player1
    include Players 
-   def initialize(name ,char)
-      @name = name
-      @char = char
-   end
 end
 
 class Player2
    include Players
-   def initialize(name ,char)
-      @name = name
-      @char = char
-   end
 end
 
 def write_on_table()
